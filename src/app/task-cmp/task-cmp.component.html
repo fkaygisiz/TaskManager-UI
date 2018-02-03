@@ -1,0 +1,58 @@
+<div *ngIf="showSuccessMessage" class="success-message">
+  Task is saved!
+</div>
+
+<div *ngIf="showErrorMessage" class="error-message">
+  An error occurred. Status: {{errorCode}}
+</div>
+
+<form #taskForm="ngForm" (ngSubmit)="onClickSubmit()" *ngIf="task">
+  <label for="id" class="input-label">ID</label>
+  <input id ="id" class="form-input" disabled name="id" type="text" [(ngModel)]="task.id" placeholder="id">
+  <br/>
+  <label for="title" class="input-label">Title</label>
+  <input id ="title" class="form-input" maxlength="199" required name="title" type="text" [(ngModel)]="task.title"
+         placeholder="title">
+  <br/>
+  <label for="description" class="input-label">Description</label>
+  <textarea id ="description" class="form-input" maxlength="1999" required name="description" rows="8" [(ngModel)]="task.description"
+            placeholder="description"></textarea>
+  <br/>
+  <label for="priority" class="input-label">Priority</label>
+  <select id ="priority" class="form-input" required name="priority" type="text" [(ngModel)]="task.priority">
+    <option value="HIGH">HIGH</option>
+    <option value="LOW">LOW</option>
+  </select>
+  <br/>
+  <label for="status" class="input-label">Status</label>
+  <select id ="status" class="form-input" required name="status" type="text" [(ngModel)]="task.status">
+    <option value="BLOCKED">BLOCKED</option>
+    <option value="DEFINED">DEFINED</option>
+    <option value="IN_PROGRESS">IN_PROGRESS</option>
+    <option value="COMPLETED">COMPLETED</option>
+  </select>
+  <br/>
+  <label for="createdAt" class="input-label">Createtion Date</label>
+  <input id ="createdAt" disabled class="form-input" name="createdAt" type="datetime-local" [(ngModel)]="task.createdAt"
+         (ngModelChange)="task.createdAt = $event">
+  <br/>
+  <label for="updatedAt" class="input-label">Update Date</label>
+  <input id ="updatedAt" disabled class="form-input" name="updatedAt" type="datetime-local" [(ngModel)]="task.updatedAt"
+         (ngModelChange)="task.updatedAt = $event">
+  <br/>
+  <label for="dueDate" class="input-label">Due Date</label>
+  <input id ="dueDate" class="form-input" name="dueDate" type="datetime-local" [(ngModel)]="task.dueDate"
+         (ngModelChange)="task.dueDate = $event">
+  <br/>
+  <label *ngIf="task.status == 'COMPLETED'" for="resolvedAt" class="input-label">Resolution Date</label>
+  <input *ngIf="task.status == 'COMPLETED'" id ="resolvedAt" disabled class="form-input" name="resolvedAt" type="datetime-local"
+         [(ngModel)]="task.resolvedAt"
+         (ngModelChange)="task.resolvedAt = $event">
+  <br/>
+  <label for="postponed" class="input-label">Postpone</label>
+  <input [(ngModel)]="postponed" type="checkbox" (change)="postponedChanged()"  name="postponed" class="onoffswitch-checkbox" id="postponed">
+  <br/>
+  <input class="form-input" [disabled]="!taskForm.valid" type="submit" value="Update">
+</form>
+<br/>
+  <button (click)="goBack()">Return Back</button>
