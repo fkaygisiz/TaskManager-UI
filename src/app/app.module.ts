@@ -5,7 +5,6 @@ import { DataTablesModule } from 'angular-datatables';
 
 
 import { AppComponent } from './app.component';
-import { NewCmpComponent } from './new-cmp/new-cmp.component';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule} from '@angular/router';
 import { TaskCmpComponent } from './task-cmp/task-cmp.component';
